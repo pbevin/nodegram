@@ -14,3 +14,4 @@ Usage
     star
     stra
     tars
+    tsar

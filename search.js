@@ -35,7 +35,7 @@ function serve(words) {
     var word = req.url.replace("/", "");
 
     res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.end(lookup(word));
+    res.end(lookup(word) + "\n");
   }).listen(3000, '127.0.0.1');
 
   function lookup(word) {
