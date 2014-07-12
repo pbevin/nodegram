@@ -30,6 +30,18 @@ function preprocess(word) {
   };
 }
 
+function matchField(key, value) {
+  return function(word) {
+    return word[key] == value;
+  }
+}
+
+function pluck(key) {
+  return function(word) {
+    return word[key];
+  }
+}
+
 function serve(words) {
   http.createServer(function (req, res) {
     var word = req.url.replace("/", "");
@@ -40,13 +52,7 @@ function serve(words) {
 
   function lookup(word) {
     var sortedLetters = preprocess(word).sorted;
-    var matches = [];
-    for (var i = 0; i < words.length; i++) {
-      if (words[i].sorted == sortedLetters) {
-        matches.push(words[i].word);
-      }
-    }
-
-    return matches.join("\n");
+    var matcher = matchField("sorted", sortedLetters);
+    return words.filter(matcher).map(pluck("word")).join("\n");
   }
 }
