@@ -31,7 +31,17 @@ function preprocess(word) {
 }
 
 function toLetters(word) {
-  return word.toLowerCase().replace(/[^a-z]/gi, "");
+  var letters = unaccent(word.toLowerCase());
+  return letters.replace(/[^a-z]/gi, "");
+}
+
+function unaccent(letters) {
+  var unaccented = "";
+  var ch;
+  letters.split('').forEach(function(ch) {
+    unaccented += accentMap[ch] || ch;
+  });
+  return unaccented;
 }
 
 function serve(words) {
@@ -100,4 +110,19 @@ function pluck(key) {
 
 String.prototype.startsWith = function (str){
   return this.indexOf(str) == 0;
+};
+
+var accentMap = {
+  ä: 'a', à: 'a', á: 'a', â: 'a', ã: 'a', å: 'a',
+  Ä: 'A', À: 'A', Á: 'A', Â: 'A', Ã: 'A', Å: 'A',
+  Ç: 'C', ç: 'c', Ñ: 'N', ñ: 'n',
+  È: 'E', É: 'E', Ê: 'E', Ë: 'E',
+  è: 'e', é: 'e', ê: 'e', ë: 'e',
+  Ì: 'I', Î: 'I', Ï: 'I',
+  ì: 'i', î: 'i', ï: 'i',
+  Ö: 'O', Ò: 'O', Ó: 'O', Ô: 'O', Ø: 'O',
+  ö: 'o', ò: 'o', ó: 'o', ô: 'o', ø: 'o',
+  Ü: 'U', Ù: 'U', Ú: 'U', Û: 'U', Ü: 'U',
+  ü: 'u', ù: 'u', ú: 'u', û: 'u', ü: 'u',
+  ß: 'ss'
 };
