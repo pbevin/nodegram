@@ -7,7 +7,7 @@ Usage
 =====
 
     $ node search.js
-    $ curl localhost:3000/arts
+    $ curl localhost:3000/an/arts
     Sart
     sart
     Star
@@ -15,3 +15,8 @@ Usage
     stra
     tars
     tsar
+    $ curl localhost:3000/fw/r.ts
+    rats
+    rets
+    rits
+    rots
